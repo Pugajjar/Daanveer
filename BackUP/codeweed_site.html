@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeWeed - Plant Trees, Help People</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2d5016;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #2d5016;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #2d5016, #4a7c59);
+      color: white;
+      padding: 8rem 0 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #2d5016;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Stats Section */
+    .stats {
+      background: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      padding: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #2d5016;
+      display: block;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 4rem 0;
+      background: #f8f9fa;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #2d5016;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      color: #2d5016;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Action Cards */
+    .actions {
+      padding: 4rem 0;
+      background: white;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .action-card {
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 10px;
+      border-left: 4px solid #2d5016;
+    }
+
+    .action-card h4 {
+      color: #2d5016;
+      margin-bottom: 1rem;
+    }
+
+    .action-card .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin: 1rem 0;
+    }
+
+    .btn-action {
+      background: #2d5016;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: #2d5016;
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .contact-info {
+      margin-top: 2rem;
+    }
+
+    .contact-info p {
+      margin: 0.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a2f0c;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <div class="logo">
+        .
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Help</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Plant Trees, Help People</h1>
+      <p>Join CodeWeed's mission to plant trees for free and support those in need. Every contribution makes a difference in building a better world.</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary" onclick="openModal('tree-modal')">🌲 Plant a Tree</button>
+        <button class="btn btn-secondary" onclick="openModal('help-modal')">🖤 Help Someone</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container">
+      <h2>Our Impact So Far</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">156</span>
+          <div class="stat-label">Trees Planted</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">89</span>
+          <div class="stat-label">Families Helped</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2,340</span>
+          <div class="stat-label">Lives Impacted</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <div class="stat-label">Free Service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="container">
+      <h2 class="section-title">How We Help</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🌲</div>
+          <h3>Free Tree Planting</h3>
+          <p>We plant trees at no cost to you. Just provide the location and we'll handle everything - from sapling to care.</p>
+          <button class="btn btn-primary" onclick="openModal('tree-modal')">Plant Now</button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🍽</div>
+          <h3>Feed the Hungry</h3>
+          <p>Help us provide nutritious meals and snacks to those who can't afford basic food necessities.</p>
+          <button class="btn btn-primary" onclick="openModal('food-modal')">Donate Food</button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🖤</div>
+          <h3>Clothes for All</h3>
+          <p>Support our clothing drive to provide warm clothes and basic garments to people in need.</p>
+          <button class="btn btn-primary" onclick="openModal('clothes-modal')">Donate Clothes</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="actions">
+    <div class="container">
+      <h2 class="section-title">Quick Actions</h2>
+      <div class="action-grid">
+        <div class="action-card">
+          <h4>🌲 SoilBall Kit</h4>
+          <p>Revolutionary seed balls that make tree planting easy. Grows in 2-3 years!</p>
+          <div class="price">₹49 (All proceeds go to charity)</div>
+          <button class="btn btn-action" onclick="openModal('soilball-modal')">Get SoilBall</button>
+        </div>
+        <div class="action-card">
+          <h4>🖤 Neem Seeds</h4>
+          <p>Traditional neem seeds for natural planting. See the magic after 3 years!</p>
+          <div class="price">₹9 (Supports tree planting)</div>
+          <button class="btn btn-action" onclick="openModal('neem-modal')">Get Seeds</button>
+        </div>
+        <div class="action-card">
+          <h4>🍽 Meal Sponsorship</h4>
+          <p>Sponsor a complete meal for someone in need. Every meal matters!</p>
+          <div class="price">₹25 per meal</div>
+          <button class="btn btn-action" onclick="openModal('meal-modal')">Sponsor Meal</button>
+        </div>
+        <div class="action-card">
+          <h4>🖤 Clothing Kit</h4>
+          <p>Provide basic clothing essentials to those who need them most.</p>
+          <div class="price">₹150 per kit</div>
+          <button class="btn btn-action" onclick="openModal('clothing-kit-modal')">Donate Kit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <div class="contact-info">
+        <p>✉ Email: pugajjar4706@gmail.com</p>
+        <p>🌲 Founded by Parthiv Gajjar</p>
+        <p>🖤 100% Charity-Driven Platform</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 CodeWeed. Making the world greener and kinder, one action at a time.</p>
+    </div>
+  </footer>
+
+  <!-- Tree Planting Modal -->
+  <div id="tree-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('tree-modal')">&times;</span>
+      <h2>🌲 Plant a Tree (Free)</h2>
+      <form onsubmit="submitForm(event, 'tree')">
+        <div class="form-group">
+          <label>Your Name:</label>
+          <input type="text" required>
+        </div>
+        <div class="form-group">
+          <label>Location for Planting:</label>
+          <input type="text" placeholder="City, Area" required>
+        </div>
+        <div class="form-group">
+          <label>Tree Type Preference:</label>
+          <select>
+            <option>Neem</option>
+            <option>Mango</option>
+            <option>Banyan</option>
+            <option>Peepal</option>
+            <option>Any (You choose)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Request Free Tree Planting</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('help-modal')">&times;</span>
+      <h2>🖤 Help Someone in Need</h2>
+      <form onsubmit="submitForm(event, 'help')">
+        <div class="form-group">
+          <label>Your Name:</label>
+          <input type="text" required>
+        </div>
+        <div class="form-group">
+          <label>How would you like to help?</label>
+          <select required>
+            <option value="">Choose an option</option>
+            <option>Provide Food/Snacks</option>
+            <option>Donate Clothes</option>
+            <option>Sponsor a Meal</option>
+            <option>General Donation</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional Details:</label>
+          <textarea placeholder="Tell us more about how you want to help"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Submit Help Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Simple modals for products -->
+  <div id="soilball-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('soilball-modal')">&times;</span>
+      <h2>🌲 SoilBall Kit - ₹49</h2>
+      <p>All proceeds support our free tree planting mission!</p>
+      <form onsubmit="submitForm(event, 'soilball')">
+        <div class="form-group">
+          <label>Your Name:</label>
+          <input type="text" required>
+        </div>
+        <div class="form-group">
+          <label>Delivery Address:</label>
+          <textarea required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Quantity:</label>
+          <input type="number" min="1" value="1">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Order SoilBall Kit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    function submitForm(event, type) {
+      event.preventDefault();
+      alert(`Thank you! Your ${type} request has been submitted. We'll contact you soon at pugajjar4706@gmail.com`);
+      event.target.closest('.modal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
